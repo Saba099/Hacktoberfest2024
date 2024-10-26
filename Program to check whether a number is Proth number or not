@@ -1,0 +1,39 @@
+#include <iostream>
+#include <cmath>
+
+// Utility function to check if a number is a power of two
+bool isPowerOfTwo(unsigned long long int n) {
+	return n && !(n & (n - 1));
+}
+
+// Function to check if a number is a Proth number using brute-force
+bool isProthNumber(unsigned long long int n) {
+	if (n < 3)
+		return false;
+
+	for (unsigned long long int k = 1; k <= n; ++k) {
+		for (unsigned long long int exponent = 0; exponent <= n; ++exponent) {
+			unsigned long long int prothNumber = k * (1ULL << exponent) + 1;
+			if (prothNumber == n)
+				return true;
+			if (prothNumber > n)
+				break;
+		}
+	}
+
+	return false;
+}
+// Nikunj Sonigara
+// Driver code
+int main() {
+	// Get n
+	unsigned long long int n = 25;
+
+	// Check n for Proth Number
+	if (isProthNumber(n - 1))
+		std::cout << "YES" << std::endl;
+	else
+		std::cout << "NO" << std::endl;
+
+	return 0;
+}
